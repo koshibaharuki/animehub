@@ -30,14 +30,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
                 'anime subtitle indonesia',
             ],
             openGraph: {
-                title: `${anime.title} - AnimeKompi`,
+                title: `${anime.title} - AnimeHub`,
                 description: anime.synopsis,
                 images: [{ url: anime.thumbnail, width: 460, height: 650, alt: anime.title }],
                 type: 'video.tv_show',
             },
             twitter: {
                 card: 'summary_large_image',
-                title: `${anime.title} - AnimeKompi`,
+                title: `${anime.title} - AnimeHub`,
                 description: anime.synopsis,
                 images: [anime.thumbnail],
             },
