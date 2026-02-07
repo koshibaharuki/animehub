@@ -1,9 +1,50 @@
+import type { Metadata } from 'next';
 import { Suspense } from 'react';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { getWatch, getDetail } from '@/lib/api';
 import { VideoPlayer } from '@/components/video-player';
 import { getAnimeSlugFromEpisode } from '@/lib/utils-episode';
+
+type Props = {
+    params: Promise<{ slug: string }>;
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+    const { slug } = await params;
+
+    try {
+        const response = await getWatch(slug);
+        const data = response.data;
+
+        return {
+            title: `${data.title} - Nonton Anime Sub Indo`,
+            description: `Nonton ${data.title} subtitle Indonesia terbaru dengan kualitas HD. Streaming dan download anime sub Indo gratis di AnimeKompi.`,
+            keywords: [
+                data.title,
+                `nonton ${data.title}`,
+                `${data.title} sub indo`,
+                'anime subtitle indonesia',
+                'streaming anime',
+                'nonton anime gratis',
+            ],
+            openGraph: {
+                title: `${data.title} - AnimeKompi`,
+                description: `Nonton ${data.title} subtitle Indonesia terbaru dengan kualitas HD.`,
+                type: 'video.episode',
+            },
+            twitter: {
+                card: 'summary_large_image',
+                title: `${data.title} - AnimeKompi`,
+                description: `Nonton ${data.title} subtitle Indonesia terbaru dengan kualitas HD.`,
+            },
+        };
+    } catch {
+        return {
+            title: 'Episode Not Found',
+        };
+    }
+}
 
 async function WatchContent({ slug }: { slug: string }) {
     try {
@@ -37,29 +78,44 @@ async function WatchContent({ slug }: { slug: string }) {
             console.error('Could not fetch episode list:', error);
         }
 
-        return (
-            <div className="container mx-auto px-4 py-6">
-                <div className="max-w-4xl mx-auto">
-                    {/* Breadcrumb */}
-                    <div className="text-sm text-gray-400 mb-4 flex gap-2">
-                        <Link href="/" className="hover:text-blue-400">Home</Link>
-                        <span>/</span>
-                        <Link href={`/anime/${animeSlug}`} className="hover:text-blue-400">Detail</Link>
-                        <span>/</span>
-                        <span className="text-white truncate">{data.title}</span>
-                    </div>
+        // JSON-LD Structured Data
+        const jsonLd = {
+            '@context': 'https://schema.org',
+            '@type': 'VideoObject',
+            name: data.title,
+            description: `Nonton ${data.title} subtitle Indonesia terbaru dengan kualitas HD.`,
+            uploadDate: new Date().toISOString(),
+        };
 
-                    {/* Video Player with Navigation */}
-                    <VideoPlayer
-                        title={data.title}
-                        servers={data.streaming_servers}
-                        downloads={data.download_links}
-                        prevEpisode={prevEpisode}
-                        nextEpisode={nextEpisode}
-                        animeSlug={animeSlug}
-                    />
+        return (
+            <>
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+                />
+                <div className="container mx-auto px-4 py-6">
+                    <div className="max-w-4xl mx-auto">
+                        {/* Breadcrumb */}
+                        <div className="text-sm text-gray-400 mb-4 flex gap-2">
+                            <Link href="/" className="hover:text-blue-400">Home</Link>
+                            <span>/</span>
+                            <Link href={`/anime/${animeSlug}`} className="hover:text-blue-400">Detail</Link>
+                            <span>/</span>
+                            <span className="text-white truncate">{data.title}</span>
+                        </div>
+
+                        {/* Video Player with Navigation */}
+                        <VideoPlayer
+                            title={data.title}
+                            servers={data.streaming_servers}
+                            downloads={data.download_links}
+                            prevEpisode={prevEpisode}
+                            nextEpisode={nextEpisode}
+                            animeSlug={animeSlug}
+                        />
+                    </div>
                 </div>
-            </div>
+            </>
         );
     } catch (error) {
         notFound();
@@ -77,11 +133,7 @@ function WatchLoading() {
     );
 }
 
-export default async function WatchPage({
-    params,
-}: {
-    params: Promise<{ slug: string }>;
-}) {
+export default async function WatchPage({ params }: Props) {
     const { slug } = await params;
 
     return (
