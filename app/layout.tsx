@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     'anime ongoing',
     'anime completed',
     'batch anime',
-    'animekompi'
+    'animehub'
   ],
   authors: [{ name: 'AnimeHub' }],
   creator: 'AnimeHub',
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'id_ID',
-    url: 'https:///',
+    url: 'https://animehub-pi.vercel.app',
     siteName: 'AnimeHub',
     title: 'AnimeHub - Nonton Anime Subtitle Indonesia Gratis',
     description: 'Nonton anime subtitle Indonesia terbaru dan terlengkap secara gratis. Streaming anime ongoing, completed, dan batch download dengan kualitas HD.',
@@ -86,7 +86,7 @@ export default function RootLayout({
   return (
     <html lang="id" className="dark" suppressHydrationWarning>
       <head>
-        <link rel="canonical" href="https:///" />
+        <link rel="canonical" href="https://animehub-pi.vercel.app" />
         <meta name="theme-color" content="#0f172a" />
       </head>
       <body className={`${inter.variable} font-sans min-h-screen flex flex-col bg-slate-950 text-white antialiased`} suppressHydrationWarning>
