@@ -8,9 +8,9 @@ export const metadata: Metadata = {
   title: 'Nonton Anime Subtitle Indonesia Terbaru',
   description: 'Streaming anime subtitle Indonesia terbaru dan terlengkap. Update setiap hari dengan kualitas HD. Nonton anime ongoing, completed, dan download batch gratis.',
   openGraph: {
-    title: 'AnimeKompi - Nonton Anime Subtitle Indonesia Terbaru',
+    title: 'AnimeHub - Nonton Anime Subtitle Indonesia Terbaru',
     description: 'Streaming anime subtitle Indonesia terbaru dan terlengkap. Update setiap hari dengan kualitas HD.',
-    url: 'https://animekompi.fun',
+    url: 'https:///',
     type: 'website',
   },
 };
