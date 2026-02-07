@@ -30,7 +30,7 @@ export function Navbar() {
                             <Play className="h-6 w-6 text-white fill-white" />
                         </div>
                         <span className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400 group-hover:to-cyan-400 transition-colors">
-                            AnimeKompi
+                            AnimeHub
                         </span>
                     </Link>
 
