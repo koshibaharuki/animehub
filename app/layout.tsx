@@ -11,7 +11,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https:///'),
+  metadataBase: new URL('https://animehub.vercel.app'),
   title: {
     default: 'AnimeHub - Nonton Anime Subtitle Indonesia Gratis',
     template: '%s | AnimeHub'
