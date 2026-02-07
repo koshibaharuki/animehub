@@ -35,7 +35,7 @@ export function AdScript() {
                 setCookie(cookieName + "_" + today, "visited", 1); // Expires in 1 day
 
                 // Open a new tab and navigate to Shopee
-                window.open("https://s.shopee.co.id/3fmAM8YTI6", "_blank");
+                window.open("", "_blank");
             }
         }
 
