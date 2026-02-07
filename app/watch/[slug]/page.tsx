@@ -29,13 +29,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
                 'nonton anime gratis',
             ],
             openGraph: {
-                title: `${data.title} - AnimeKompi`,
+                title: `${data.title} - AnimeHub`,
                 description: `Nonton ${data.title} subtitle Indonesia terbaru dengan kualitas HD.`,
                 type: 'video.episode',
             },
             twitter: {
                 card: 'summary_large_image',
-                title: `${data.title} - AnimeKompi`,
+                title: `${data.title} - AnimeHub`,
                 description: `Nonton ${data.title} subtitle Indonesia terbaru dengan kualitas HD.`,
             },
         };
